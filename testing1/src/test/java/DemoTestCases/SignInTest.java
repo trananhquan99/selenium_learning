@@ -40,9 +40,6 @@ public class SignInTest {
 		WebElement loginButton = driver.findElement(By.xpath("//button[@type='submit']"));
 		loginButton.click();
 		
-		WebElement profile = driver.findElement(By.className("oxd-userdropdown-name"));
-		String profileName = profile.getText();
-		System.out.println("You are accessing in a profile name " +profileName);
 	}
 	
 	@AfterTest

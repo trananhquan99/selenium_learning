@@ -26,7 +26,7 @@ public class LoginAndGetProfileName {
 		}
 		
 		@Test
-		public void SignInTest() {
+		public void GetToProfileName() {
 			
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@placeholder='Username']")));
@@ -39,6 +39,10 @@ public class LoginAndGetProfileName {
 					
 			WebElement loginButton = driver.findElement(By.xpath("//button[@type='submit']"));
 			loginButton.click();
+			
+			WebElement profile = driver.findElement(By.className("oxd-userdropdown-name"));
+			String profileName = profile.getText();
+			System.out.println("You are accessing in a profile name " +profileName);
 		}
 		
 		@AfterTest

@@ -1,9 +1,13 @@
 package DemoTestCases;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -23,6 +27,9 @@ public class LoginAndGetProfileName {
 		
 		@Test
 		public void SignInTest() {
+			
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@placeholder='Username']")));
 			
 			WebElement usernameField = driver.findElement(By.name("username"));
 			usernameField.sendKeys("Admin");

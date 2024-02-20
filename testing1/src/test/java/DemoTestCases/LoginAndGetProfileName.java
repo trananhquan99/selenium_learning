@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -30,7 +31,7 @@ public class LoginAndGetProfileName {
 		}
 		
 		@Test
-		public void GetToProfileName() throws InterruptedException {
+		public void GetProfileName() throws InterruptedException {
 			//Login
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@placeholder='Username']")));
@@ -43,15 +44,19 @@ public class LoginAndGetProfileName {
 					
 			WebElement loginButton = driver.findElement(By.xpath("//button[@type='submit']"));
 			loginButton.click();
-			
-			//Get profile name
-			wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//span[@class='oxd-userdropdown-tab']")));
-			
-			WebElement profile = driver.findElement(By.xpath("//span[@class='oxd-userdropdown-tab']/p[@class='oxd-userdropdown-name']"));
-			String profileName = profile.getText();
-			System.out.println("You are accessing in a profile name " +profileName);
-			
-			Thread.sleep(3000);
+			WebElement loginAlert = driver.findElement(By.xpath("//p[text()='Invalid credentials']"));
+			if (loginAlert.isDisplayed()) {
+				Assert.fail("Cannot login");
+			} else {
+				//Get profile name
+				wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//span[@class='oxd-userdropdown-tab']")));
+				
+				WebElement profile = driver.findElement(By.xpath("//span[@class='oxd-userdropdown-tab']/p[@class='oxd-userdropdown-name']"));
+				String profileName = profile.getText();
+				System.out.println("You are accessing in a profile name " +profileName);
+				
+				Thread.sleep(3000);
+			}
 		}
 		
 		@AfterTest

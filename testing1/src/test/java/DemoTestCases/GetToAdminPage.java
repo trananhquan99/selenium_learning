@@ -45,15 +45,19 @@ public class GetToAdminPage {
 				
 		WebElement loginButton = driver.findElement(By.xpath("//button[@type='submit']"));
 		loginButton.click();
-		
-		//Verify the profile name
-		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//span[@class='oxd-userdropdown-tab']")));
-		
-		WebElement profile = driver.findElement(By.xpath("//span[@class='oxd-userdropdown-tab']/p[@class='oxd-userdropdown-name']"));
-		String profileName = profile.getText();
-		System.out.println("You are accessing in a profile name " +profileName);
-		
-		Thread.sleep(3000);
+		WebElement loginAlert = driver.findElement(By.xpath("//p[text()='Invalid credentials']"));
+		if (loginAlert.isDisplayed()) {
+			Assert.fail("Cannot login");
+		} else if (loginAlert.isDisplayed() == false) {
+			//Verify the profile name
+			wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//span[@class='oxd-userdropdown-tab']")));
+			
+			WebElement profile = driver.findElement(By.xpath("//span[@class='oxd-userdropdown-tab']/p[@class='oxd-userdropdown-name']"));
+			String profileName = profile.getText();
+			System.out.println("You are accessing in a profile name " +profileName);
+			
+			Thread.sleep(3000);
+		}
 		
 		//Go to Admin page
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@class='oxd-main-menu-item' and @href='/web/index.php/admin/viewAdminModule']")));
@@ -63,6 +67,8 @@ public class GetToAdminPage {
 		
 		String AdminBreadcrumb = driver.findElement(By.xpath("//h6[@class='oxd-text oxd-text--h6 oxd-topbar-header-breadcrumb-module']")).getText();
 		Assert.assertEquals(AdminBreadcrumb, "Admin");
+		
+		System.out.println("You are at " +AdminBreadcrumb+ " page");
 		
 		Thread.sleep(3000);
 	}

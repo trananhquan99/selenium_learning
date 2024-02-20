@@ -25,12 +25,15 @@ public class EnterWebsite {
 	}
 	
 	@Test
-	public void NavigateToWebsite() {
+	public void NavigateToWebsite() throws InterruptedException {
 		//Go to the website
 		driver.get(BaseURL);
 		
 		String pageTitle = driver.getTitle();
 		Assert.assertEquals(pageTitle,"OrangeHRM");
+		System.out.println("Welcome to " +pageTitle);
+		
+		Thread.sleep(3000);
 	}
 	
 	@AfterTest

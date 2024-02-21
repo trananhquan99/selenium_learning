@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="DemoTestCases.LoginAndGetProfileName">
+      <class name="DemoTestCases.GetToAdminPage">
         <methods>
-          <include name="GetProfileName"/>
+          <include name="getToAdminPage"/>
           <include name="CloseBrowser"/>
           <include name="OpenBrowser"/>
         </methods>
-      </class> <!-- DemoTestCases.LoginAndGetProfileName -->
+      </class> <!-- DemoTestCases.GetToAdminPage -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

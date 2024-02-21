@@ -38,17 +38,17 @@ public class GetToAdminPage {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@placeholder='Username']")));
 		
 		WebElement usernameField = driver.findElement(By.xpath("//input[@placeholder='Username']"));
-		usernameField.sendKeys("Admin");
+		usernameField.sendKeys("Admin123");
 		
 		WebElement passwordField = driver.findElement(By.name("password"));
 		passwordField.sendKeys("admin123");
 				
 		WebElement loginButton = driver.findElement(By.xpath("//button[@type='submit']"));
 		loginButton.click();
-		WebElement loginAlert = driver.findElement(By.xpath("//p[text()='Invalid credentials']"));
-		if (loginAlert.isDisplayed()) {
+		//WebElement loginAlert = driver.findElement(By.xpath("//p[text()='Invalid credentials']"));
+		if (driver.findElements(By.xpath("//p[text()='Invalid credentials']")).size()!=0) {
 			Assert.fail("Cannot login");
-		} else if (loginAlert.isDisplayed() == false) {
+		} else {
 			//Verify the profile name
 			wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//span[@class='oxd-userdropdown-tab']")));
 			

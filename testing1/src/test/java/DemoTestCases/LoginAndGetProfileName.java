@@ -44,8 +44,8 @@ public class LoginAndGetProfileName {
 					
 			WebElement loginButton = driver.findElement(By.xpath("//button[@type='submit']"));
 			loginButton.click();
-			WebElement loginAlert = driver.findElement(By.xpath("//p[text()='Invalid credentials']"));
-			if (loginAlert.isDisplayed()) {
+			//WebElement loginAlert = driver.findElement(By.xpath("//p[text()='Invalid credentials']"));
+			if (driver.findElements(By.xpath("//p[text()='Invalid credentials']")).size()!=0) {
 				Assert.fail("Cannot login");
 			} else {
 				//Get profile name
